@@ -18,6 +18,8 @@ const Proposal = mongoose.model('Proposal', proposalSchema);
 
 app.get('/donors', async (req, res) => res.json(await Donor.find()));
 app.post('/donors', async (req, res) => { const { name, amount, note } = req.body; if (!name || !amount) return res.status(400).json({ error: 'ناقص' }); const d = await Donor.create({ id: Date.now(), name, amount, note, time: new Date().toISOString() }); res.json(d); });
+app.put('/donors/:id', async (req, res) => { const d = await Donor.findByIdAndUpdate(req.params.id, {status: req.body.status}, {new: true}); res.json(d); });
+
 app.delete('/donors/:id', async (req, res) => { await Donor.deleteOne({ id: req.params.id }); res.json({ success: true }); });
 
 app.get('/proposals', async (req, res) => res.json(await Proposal.find()));
