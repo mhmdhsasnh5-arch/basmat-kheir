@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'donate.html')));
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://mhmdhsasnh5_db_user:0cfQACRPU7XlcaLK@cluster0.tmxfauu.mongodb.net/basmat?appName=Cluster0';
 
